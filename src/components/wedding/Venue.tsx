@@ -6,15 +6,6 @@ import { SectionHeading } from "./SectionHeading";
 
 const venues = [
   {
-    label: "Wedding Ceremony · 21 Nov",
-    nameLead: "Ripples",
-    nameItalic: "Backwater Resort",
-    address: "Ripples Backwater Resort, Kureepuzha, Kollam – 691601.",
-    alt: "Ripples Backwater Resort",
-    image: venue,
-    map: "https://share.google/eTZklByTkpiB100NY",
-  },
-  {
     label: "Reception · 22 Nov",
     nameLead: "Mukathala Mar Thoma",
     nameItalic: "Parish Hall",
@@ -46,7 +37,7 @@ export function Venue() {
       </div>
 
       <div className="relative z-10">
-        <SectionHeading eyebrow="Where We Gather" title="The" italic="Venues" />
+        <SectionHeading eyebrow="Where We Gather" title="The" italic="Venue" />
 
         <div className="mx-auto mt-10 max-w-5xl space-y-6 md:mt-16 md:space-y-10">
           {venues.map((v, i) => (

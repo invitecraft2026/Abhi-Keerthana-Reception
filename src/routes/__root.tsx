@@ -63,26 +63,26 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
 
-      { title: "Abhi & Keerthana · A Wedding Invitation" },
+      { title: "Abhi & Keerthana · A Reception Invitation" },
       {
         name: "description",
         content:
-          "Together with their families, Abhi & Keerthana invite you to celebrate their wedding on 21 November 2026 at Ripples Backwater Resort, Kollam, with a reception on 22 November.",
+          "Together with their families, Abhi & Keerthana invite you to their wedding reception on 22 November 2026 at 5:00 PM at Mukathala Mar Thoma Parish Hall, Kureepally.",
       },
 
       // Open Graph
       {
         property: "og:title",
-        content: "Abhi & Keerthana · A Wedding Invitation",
+        content: "Abhi & Keerthana · A Reception Invitation",
       },
       {
         property: "og:description",
         content:
-          "Celebrate our Wedding — 21 November 2026 at Ripples Backwater Resort, Kollam. Reception on 22 November.",
+          "Join us for our Reception — 22 November 2026 at Mukathala Mar Thoma Parish Hall, Kureepally.",
       },
       {
         property: "og:image",
-        content: "https://abhi-keerthana.invitecraft2026.workers.dev/image7.jpeg",
+        content: "https://abhi-keerthana-reception.invitecraft2026.workers.dev/image7.jpeg",
       },
       {
         property: "og:image:width",
@@ -94,7 +94,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       },
       {
         property: "og:url",
-        content: "https://abhi-keerthana.invitecraft2026.workers.dev/image7.jpeg",
+        content: "https://abhi-keerthana-reception.invitecraft2026.workers.dev/image7.jpeg",
       },
       {
         property: "og:type",
@@ -108,15 +108,15 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       },
       {
         name: "twitter:title",
-        content: "Abhi & Keerthana · A Wedding Invitation",
+        content: "Abhi & Keerthana · A Reception Invitation",
       },
       {
         name: "twitter:description",
-        content: "Celebrate our Wedding — 21 November 2026 in Kollam. Reception on 22 November.",
+        content: "Join us for our Reception — 22 November 2026 in Kureepally.",
       },
       {
         name: "twitter:image",
-        content: "https://abhi-keerthana.invitecraft2026.workers.dev/image7.jpeg",
+        content: "https://abhi-keerthana-reception.invitecraft2026.workers.dev/image7.jpeg",
       },
     ],
 

@@ -40,7 +40,7 @@ export function ThankYou() {
         <Ornament className="mx-auto mt-10 h-6 w-56" />
 
         <p className="mt-8 font-serif text-lg italic text-deep-brown/70">— Abhi &amp; Keerthana</p>
-        <p className="mt-2 text-[10px] tracking-[0.5em] text-deep-brown/50 uppercase">Kollam · 21 November</p>
+        <p className="mt-2 text-[10px] tracking-[0.5em] text-deep-brown/50 uppercase">Kureepally · 22 November</p>
       </div>
     </section>
   );

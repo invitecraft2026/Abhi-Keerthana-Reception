@@ -124,7 +124,7 @@ export function Hero() {
           transition={{ delay: 1.8, duration: 1 }}
           className="mt-8 font-serif text-xl italic text-deep-brown drop-shadow-lg md:text-2xl"
         >
-          Two souls · One celebration · Wedding
+          Two souls · One celebration · Reception
         </motion.p>
       </motion.div>
 

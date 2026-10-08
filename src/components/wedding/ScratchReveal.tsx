@@ -239,7 +239,7 @@ export function ScratchReveal() {
             animate={revealed ? { scale: [1, 1.04, 1] } : {}}
             transition={{ duration: 0.6, ease: "easeOut" }}
           >
-            <span className="mt-2 font-serif text-3xl font-bold text-deep-brown">21</span>
+            <span className="mt-2 font-serif text-3xl font-bold text-deep-brown">22</span>
             <span className="font-serif text-xl italic font-bold text-deep-brown">
               November 2026
             </span>

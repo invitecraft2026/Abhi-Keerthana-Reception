@@ -5,15 +5,7 @@ import coupleEvents from "@/assets/coupleimages/image3.jpeg";
 
 const events = [
   {
-    tag: "Wedding Ceremony",
-    title: "Marriage",
-    date: "Saturday · 21 November 2026",
-    time: "Evening · 4:30 PM",
-    location: "Ripples Backwater Resort, Kureepuzha, Kollam 691601",
-    map: "https://share.google/eTZklByTkpiB100NY",
-  },
-  {
-    tag: "Reception",
+    tag: "Join Us For",
     title: "Reception",
     date: "Sunday · 22 November 2026",
     time: "Evening · 5:00 PM",
@@ -44,8 +36,8 @@ export function Events() {
       </div>
 
       <div className="relative z-10">
-        <SectionHeading eyebrow="The Celebrations" title="Wedding" italic="Events" />
-        <div className="mx-auto mt-20 grid max-w-5xl gap-8 md:grid-cols-2">
+        <SectionHeading eyebrow="The Celebration" title="Reception" italic="Details" />
+        <div className="mx-auto mt-20 grid max-w-xl gap-8">
           {events.map((e, i) => (
             <motion.article
               key={e.title}
