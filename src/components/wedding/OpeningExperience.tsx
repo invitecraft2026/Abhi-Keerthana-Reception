@@ -8,7 +8,7 @@ import heroEndFrame from "@/assets/end_frame.jpg";
 
 // 👇 Text shown on the intro screen
 const INTRO_NAMES = "Abhi & Keerthana";
-const INTRO_DATE = "21 · 22 November 2026"; // reception-only site: "22 November 2026"
+// const INTRO_DATE = "21 · 22 November 2026"; // reception-only site: "22 November 2026"
 // 👇 Which part of the photo stays in view on tall phone screens (x% y%)
 const PHOTO_FOCUS = "50% 30%";
 
@@ -73,14 +73,14 @@ export function OpeningExperience({ onComplete }: { onComplete: () => void }) {
               {INTRO_NAMES}
             </motion.p>
 
-            <motion.p
+            {/* <motion.p
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 1, delay: 1.1 }}
               className="mt-4 text-[11px] tracking-[0.45em] text-warm-white/90 uppercase drop-shadow md:text-xs"
             >
               {INTRO_DATE}
-            </motion.p>
+            </motion.p> */}
 
             <motion.span
               initial={{ opacity: 0 }}
