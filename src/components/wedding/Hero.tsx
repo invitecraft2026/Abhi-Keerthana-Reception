@@ -1,7 +1,7 @@
 import { motion, useScroll, useTransform } from "framer-motion";
 import { useEffect, useRef } from "react";
 // import heroimage from "@/assets/end_frame.jpg";
-import heroimage from "@/assets/end_frame.jpg";
+import heroimage from "@/assets/hero_background.png";
 import { FloatingPetals } from "./FloatingPetals";
 import { Ornament } from "./Ornament";
 import { ChevronDown } from "lucide-react";

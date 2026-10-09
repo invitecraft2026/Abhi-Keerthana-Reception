@@ -3,6 +3,17 @@ import { Calendar, Clock, MapPin } from "lucide-react";
 import { SectionHeading } from "./SectionHeading";
 import coupleEvents from "@/assets/coupleimages/image3.jpeg";
 
+/**
+ * MAP LINK
+ * "View on Map" opens Google Maps with a pin on the venue.
+ *
+ * For a pin on the EXACT spot, fill in `coords` with "latitude,longitude"
+ * (Google Maps -> long-press / right-click the venue -> tap the numbers to copy).
+ * If `coords` is empty, the venue name + address is searched instead.
+ */
+const mapsPin = (target: string) =>
+  `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(target)}`;
+
 const events = [
   {
     tag: "Join Us For",
@@ -10,14 +21,14 @@ const events = [
     date: "Sunday · 22 November 2026",
     time: "Evening · 5:00 PM",
     location: "Mukathala Mar Thoma Parish Hall, Kureepally",
-    map: "https://share.google/HIN4OQ2POoNT5YTS8",
+    coords: "", // e.g. "8.9xxxxx,76.5xxxxx"
+    query: "Mukathala Mar Thoma Parish Hall, Kureepally, Kollam, Kerala",
   },
 ];
 
 export function Events() {
   return (
     <section className="relative overflow-hidden py-32 px-6">
-      {/* Soft couple photo backdrop */}
       {/* Soft couple photo backdrop */}
       <div className="pointer-events-none absolute inset-0">
         <img
@@ -72,7 +83,7 @@ export function Events() {
               </div>
 
               <a
-                href={e.map}
+                href={mapsPin(e.coords || e.query)}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="mt-6 inline-block text-[11px] tracking-[0.3em] text-rose-gold uppercase underline-offset-4 transition-colors hover:text-deep-brown hover:underline"

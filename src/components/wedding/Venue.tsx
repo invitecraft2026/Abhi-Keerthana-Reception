@@ -4,6 +4,20 @@ import venue from "@/assets/venue.jpg";
 import coupleSecondary from "@/assets/coupleimages/image4.jpeg";
 import { SectionHeading } from "./SectionHeading";
 
+/**
+ * MAP LINKS
+ * "Get Directions" opens Google Maps navigation straight to the venue.
+ * "View on Map" opens Google Maps with a pin on the venue.
+ *
+ * For a pin on the EXACT spot, fill in `coords` with "latitude,longitude"
+ * (Google Maps -> long-press / right-click the venue -> tap the numbers to copy).
+ * If `coords` is empty, the venue name + address is searched instead.
+ */
+const mapsDirections = (target: string) =>
+  `https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(target)}&travelmode=driving`;
+const mapsPin = (target: string) =>
+  `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(target)}`;
+
 const venues = [
   {
     label: "Reception · 22 Nov",
@@ -12,7 +26,8 @@ const venues = [
     address: "Mukathala Mar Thoma Parish Hall, Kureepally.",
     alt: "Mukathala Mar Thoma Parish Hall",
     image: venue,
-    map: "https://share.google/HIN4OQ2POoNT5YTS8",
+    coords: "", // e.g. "8.9xxxxx,76.5xxxxx"
+    query: "Mukathala Mar Thoma Parish Hall, Kureepally, Kollam, Kerala",
   },
 ];
 
@@ -96,7 +111,7 @@ export function Venue() {
                 </p>
                 <div className="flex w-full flex-col gap-3 pt-1 sm:w-auto sm:flex-row sm:flex-wrap sm:justify-center md:justify-start md:pt-2">
                   <a
-                    href={v.map}
+                    href={mapsDirections(v.coords || v.query)}
                     target="_blank"
                     rel="noreferrer"
                     className="inline-flex items-center justify-center gap-2 rounded-full px-6 py-3 text-[10px] tracking-[0.3em] text-warm-white uppercase transition-transform hover:scale-[1.02] md:text-[11px] md:tracking-[0.35em]"
@@ -107,7 +122,7 @@ export function Venue() {
                     <Navigation className="h-4 w-4" /> Get Directions
                   </a>
                   <a
-                    href={v.map}
+                    href={mapsPin(v.coords || v.query)}
                     target="_blank"
                     rel="noreferrer"
                     className="hidden items-center justify-center gap-2 rounded-full border border-rose-gold/40 px-6 py-3 text-[11px] tracking-[0.35em] text-deep-brown uppercase sm:inline-flex"
