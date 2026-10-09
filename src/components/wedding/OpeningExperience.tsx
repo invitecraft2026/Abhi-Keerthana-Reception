@@ -1,125 +1,97 @@
 // src/components/wedding/OpeningExperience.tsx
 import { motion, AnimatePresence } from "framer-motion";
-import { useCallback, useEffect, useRef, useState } from "react";
-import coverImg from "@/assets/first_frame_from_Burgundy_velvet.png";
-import openingVideo from "@/assets/Burgundy_velvet_1.mp4";
-import heroEndFrame from "@/assets/last_frame_from_Burgundy_velvet.png";
+import { useCallback, useEffect, useState } from "react";
+// 👇 Change this to the couple photo you want on the intro screen
+import coverImg from "@/assets/coupleimages/image1.jpeg";
+// Hero background, preloaded so there is no flash when the intro fades out
+import heroEndFrame from "@/assets/end_frame.jpg";
 
-type Phase = "cover" | "video" | "exiting";
+// 👇 Text shown on the intro screen
+const INTRO_NAMES = "Abhi & Keerthana";
+const INTRO_DATE = "21 · 22 November 2026"; // reception-only site: "22 November 2026"
+// 👇 Which part of the photo stays in view on tall phone screens (x% y%)
+const PHOTO_FOCUS = "50% 30%";
 
 export function OpeningExperience({ onComplete }: { onComplete: () => void }) {
-  const [phase, setPhase] = useState<Phase>("cover");
-  const [videoReady, setVideoReady] = useState(false);
-  const videoRef = useRef<HTMLVideoElement>(null);
+  const [opened, setOpened] = useState(false);
 
-  // Preload the hero background early so it's already cached
-  // by the time the video ends — no load-flash on handoff.
+  // Preload the hero background so it is cached before the intro fades out.
   useEffect(() => {
     const img = new Image();
     img.src = heroEndFrame;
   }, []);
 
   const handleOpen = useCallback(() => {
-    setPhase("video");
-  }, []);
-
-  useEffect(() => {
-    if (phase === "video" && videoRef.current) {
-      const v = videoRef.current;
-      v.currentTime = 0;
-      v.muted = true;
-      v.play().catch(() => {});
-    }
-  }, [phase]);
-
-  const finish = useCallback(() => {
-    setPhase("exiting");
-    // Start revealing Hero immediately so it crossfades
-    // WITH the overlay's fade-out, instead of after it.
+    if (opened) return;
+    setOpened(true);
+    // Reveal the main page right away so it crossfades with the intro's fade-out.
     onComplete();
-  }, [onComplete]);
-
-  const handleEnded = () => finish();
+  }, [opened, onComplete]);
 
   return (
     <AnimatePresence>
-      {phase !== "exiting" && (
-        <motion.div
+      {!opened && (
+        <motion.button
           key="opening"
-          className="fixed inset-0 z-[95] flex items-center justify-center overflow-hidden bg-black"
+          type="button"
+          onClick={handleOpen}
+          aria-label="Tap anywhere to open the invitation"
+          className="fixed inset-0 z-[95] h-full w-full cursor-pointer overflow-hidden bg-black text-left"
           exit={{ opacity: 0 }}
-          transition={{ duration: 1.2, ease: [0.19, 1, 0.22, 1] }}
+          transition={{ duration: 1.1, ease: [0.19, 1, 0.22, 1] }}
         >
-          {/* COVER SCREEN */}
-          <AnimatePresence>
-            {phase === "cover" && (
-              <motion.button
-                key="cover"
-                onClick={handleOpen}
-                aria-label="Tap to open invitation"
-                className="absolute inset-0 flex h-full w-full items-end justify-center overflow-hidden"
-                exit={{ opacity: 0 }}
-                transition={{ duration: 0.6, ease: [0.19, 1, 0.22, 1] }}
-              >
-                <div
-                  className="absolute inset-0"
-                  style={{
-                    backgroundImage: `url(${coverImg})`,
-                    backgroundSize: "cover",
-                    backgroundPosition: "center",
-                  }}
-                />
+          {/* Couple photo with a slow, gentle zoom */}
+          <motion.div
+            className="absolute inset-0"
+            initial={{ scale: 1.08, opacity: 0 }}
+            animate={{ scale: 1, opacity: 1 }}
+            transition={{ duration: 2.4, ease: [0.19, 1, 0.22, 1] }}
+            style={{
+              backgroundImage: `url(${coverImg})`,
+              backgroundSize: "cover",
+              backgroundPosition: PHOTO_FOCUS,
+            }}
+          />
 
-                <motion.div
-                  initial={{ opacity: 0, y: 10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 1, delay: 0.6 }}
-                  className="relative z-10 mb-14 flex flex-col items-center"
-                >
-                  <motion.span
-                    animate={{ opacity: [0.5, 1, 0.5] }}
-                    transition={{ duration: 2.2, repeat: Infinity, ease: "easeInOut" }}
-                    className="rounded-full bg-black/30 px-6 py-2 text-[10px] tracking-[0.5em] text-warm-white uppercase backdrop-blur-sm"
-                  >
-                    Tap to Open
-                  </motion.span>
-                </motion.div>
-              </motion.button>
-            )}
-          </AnimatePresence>
+          {/* Soft shading so the text stays readable on any photo */}
+          <div
+            className="absolute inset-0"
+            style={{
+              background:
+                "linear-gradient(180deg, rgba(0,0,0,0.18) 0%, rgba(0,0,0,0) 30%, rgba(0,0,0,0) 48%, rgba(0,0,0,0.62) 100%)",
+            }}
+          />
 
-          {/* VIDEO SCREEN */}
-          {phase === "video" && (
-            <motion.div
-              key="video"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ duration: 0.6 }}
-              className="absolute inset-0"
+          {/* Names, date and tap hint */}
+          <div className="absolute inset-x-0 bottom-0 flex flex-col items-center px-6 pb-12 text-center md:pb-16">
+            <motion.p
+              initial={{ opacity: 0, y: 14 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 1.1, delay: 0.7 }}
+              className="font-script text-5xl leading-none text-warm-white drop-shadow-lg md:text-7xl"
             >
-              <video
-                ref={videoRef}
-                src={openingVideo}
-                muted
-                playsInline
-                preload="auto"
-                onEnded={handleEnded}
-                onCanPlay={() => setVideoReady(true)}
-                className="h-full w-full object-cover"
-              />
+              {INTRO_NAMES}
+            </motion.p>
 
-              {!videoReady && (
-                <div className="absolute inset-0 flex items-center justify-center bg-black">
-                  <motion.div
-                    animate={{ rotate: 360 }}
-                    transition={{ duration: 1.4, repeat: Infinity, ease: "linear" }}
-                    className="h-10 w-10 rounded-full border-2 border-temple-gold/30 border-t-temple-gold"
-                  />
-                </div>
-              )}
-            </motion.div>
-          )}
-        </motion.div>
+            <motion.p
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 1, delay: 1.1 }}
+              className="mt-4 text-[11px] tracking-[0.45em] text-warm-white/90 uppercase drop-shadow md:text-xs"
+            >
+              {INTRO_DATE}
+            </motion.p>
+
+            <motion.span
+              initial={{ opacity: 0 }}
+              animate={{ opacity: [0.45, 1, 0.45] }}
+              transition={{ duration: 2.2, delay: 1.6, repeat: Infinity, ease: "easeInOut" }}
+              className="mt-8 rounded-full bg-black/30 px-6 py-2 text-[10px] tracking-[0.5em] text-warm-white uppercase backdrop-blur-sm"
+            >
+              Tap anywhere to open
+            </motion.span>
+          </div>
+        </motion.button>
       )}
     </AnimatePresence>
   );
